@@ -1,15 +1,33 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import generateID from 'uniqid';
 
-import AddAndShowBar from './components/addAndShowBar';
+import AddBar from './components/addBar';
 import TodoLists from './components/todoLists';
 
 class TodoApp extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      todoLists: [],
+    };
+  }
+
+  addTodoList(term) {
+    const newTodoList = {
+      id: generateID(),
+      title: term,
+      content: [],
+    };
+    this.setState({ todoLists: [...this.state.todoLists, newTodoList] });
+  }
+
   render() {
     return (
       <div>
-        <AddAndShowBar />
-        <TodoLists />
+        <AddBar addTodoList={this.addTodoList.bind(this)} />
+        <TodoLists todoLists={this.state.todoLists} />
       </div>
     );
   }
