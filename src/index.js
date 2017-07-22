@@ -18,14 +18,12 @@ class TodoApp extends Component {
     const newTodoList = {
       key: generateID(),
       title: term,
-      //content: [],
+      content: [],
     };
     this.setState({ todoLists: [...this.state.todoLists, newTodoList] });
   }
 
   render() {
-    console.log(this.state.todoLists); // test usage
-    if (this.state.todoLists === []) return <div className="col-md-12">no todo-lists to show</div>;
     return (
       <div>
         <AddBar addTodoList={this.addTodoList.bind(this)} />

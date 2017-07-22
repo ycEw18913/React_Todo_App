@@ -12,3 +12,16 @@
   font-size: 50px;
   color: green;
 }
+
+.list {
+  width: 10000px;
+  height: auto;
+  align-items: center;
+  text-align: center;
+  border: solid 2px #eee;
+  border-radius: 9px;
+}
+
+.list:hover {
+  background-color: #eee;
+}

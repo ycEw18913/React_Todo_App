@@ -28,6 +28,7 @@ export default class listItem extends Component {
   }
 
   render() {
+    return ();
     return (
       <div>・
           <input
