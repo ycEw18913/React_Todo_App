@@ -23,24 +23,27 @@ export default class TodoLists extends Component {
 
   renderTodoLists() {
     return _.map(this.props.todoLists, list => {
+      console.log(list)
       return (
         <TodoList
+          todoList={list}
           key={list.id}
-          title={list.title}
-          content={list.content}
         />
       );
     });
   }
 
   render() {
+
     return (
       <div>
         <div className="col-md-12">
           <div className="col-md-6 done">Finished: </div>
           <div className="col-md-6 undone">Unfinished: </div>
         </div>
-          {this.renderTodoLists.bind(this)}
+        <div className="col-md-4" key="list.id">
+          {this.renderTodoLists()}
+        </div>
       </div>
     );
   }
