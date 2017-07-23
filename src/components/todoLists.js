@@ -4,11 +4,20 @@ import _ from 'lodash';
 import TodoList from './todoList';
 
 export default class TodoLists extends Component {
+  deleteTodoList(key) {
+    this.props.deleteTodoList(key);
+  }
 
   renderTodoLists() {
     return _.map(this.props.todoLists, list => {
-      return (<TodoList todoList={list} key={list.key}/>);
-      });
+      return (
+        <TodoList
+          todoList={list}
+          deleteList={this.deleteTodoList.bind(this)}
+          key={list.key}
+        />
+      );
+    });
   }
 
   render() {

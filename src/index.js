@@ -15,7 +15,7 @@ class TodoApp extends Component {
   addTodoList(term) {
     const oldTodoLists = this.state.todoLists;
     const newTodoList = {
-      key: generateID('ID'),
+      key: generateID('IDT'),
       title: term,
       content: {},
     };
@@ -23,12 +23,18 @@ class TodoApp extends Component {
     this.setState({ todoLists: newTodoLists });
   }
 
+  deleteTodoList(key) {
+    this.setState({ todoLists: _.omit(this.state.todoLists, key) });
+  }
+
   render() {
-    console.log(this.state.todoLists);
     return (
       <div>
         <AddBar addTodoList={this.addTodoList.bind(this)} />
-        <TodoLists todoLists={this.state.todoLists} />
+        <TodoLists
+          todoLists={this.state.todoLists}
+          deleteTodoList={this.deleteTodoList.bind(this)}
+        />
       </div>
     );
   }

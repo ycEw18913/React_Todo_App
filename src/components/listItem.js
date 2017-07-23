@@ -10,7 +10,11 @@ export default class listItem extends Component {
   onInputChange(event) {
     this.setState({ term: event.target.value });
   }
-  
+
+  onDeleteClick() {
+    this.props.deleteListItem(this.props.key);
+  }
+
   render() {
     return (
       <div className="modi item">
@@ -29,7 +33,12 @@ export default class listItem extends Component {
             onChange={this.onInputChange.bind(this)}
           />
         </div>
-        <button className="btn btn-danger">X</button>
+        <button
+          className="btn btn-danger"
+          onClick={this.onDeleteClick.bind(this)}
+        >
+          X
+        </button>
       </div>
     );
   }

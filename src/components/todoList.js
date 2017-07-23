@@ -25,19 +25,34 @@ export default class TodoList extends Component {
 
   onItemSubmit(event) {
     event.preventDefault();
-    const newListItem = { key: generateID() };
-    this.props.todoList.content = [...this.props.todoList.content, newListItem];
+    const newListItem = { key: generateID('IDL') };
+    this.props.todoList.content = { ...this.props.todoList.content, [newListItem.key]: newListItem };
     this.setState({ term: '' });
+  }
+
+  onDeleteClick() {
+    this.props.deleteList(this.props.todoList.key);
+  }
+
+  deleteListItem(key) {
+    console.log(key, this.props.todoList.content);
+    this.props.todoList.content = _.omit(this.props.todoList.content, key);
   }
 
   renderListItems() {
     return _.map(this.props.todoList.content, item => {
-      return (<ListItem key={item.key} />);
-      });
+      return (
+        <ListItem
+          key={item.key}
+          deleteListItem={this.deleteListItem.bind(this)}
+        />
+        );
+    });
   }
 
   render() {
     const { todoList } = this.props;
+    console.log(todoList);
     return (
       <div className="col-md-5 list">
         <form className="form-group dec" onSubmit={this.onFormSubmit.bind(this)}>
@@ -60,7 +75,12 @@ export default class TodoList extends Component {
         <form onSubmit={this.onItemSubmit.bind(this)} className="input-group">
           <button type="submit" className="btn btn-info add">＋</button>
         </form>
-        <button className="btn btn-warning pull-xs-right modi">Delete List</button>
+        <button
+          onClick={this.onDeleteClick.bind(this)}
+          className="btn btn-warning pull-xs-right modi"
+        >
+          Delete List
+        </button>
       </div>
     );
   }
