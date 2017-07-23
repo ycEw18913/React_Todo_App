@@ -5,14 +5,6 @@ import TodoList from './todoList';
 
 export default class TodoLists extends Component {
 
-  doneCount() {}
-
-  toggleCheckBox() {}
-
-  deleteTodoList() {}
-
-  editTodoList() {}
-
   renderTodoLists() {
     return _.map(this.props.todoLists, list => {
       return (<TodoList todoList={list} key={list.key}/>);

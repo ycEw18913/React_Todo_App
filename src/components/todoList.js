@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import generateID from 'uniqid';
 import _ from 'lodash';
 
-//import ListItem from './listItem';
+import ListItem from './listItem';
 
 export default class TodoList extends Component {
   constructor(props) {
@@ -17,33 +18,49 @@ export default class TodoList extends Component {
   onFormSubmit(event) {
     event.preventDefault();
     if (this.state.term !== '') {
-      this.setState({ term: '' });
       this.props.todoList.title = this.state.term;
+      this.setState({ term: '' });
     }
+  }
+
+  onItemSubmit(event) {
+    event.preventDefault();
+    const newListItem = { key: generateID() };
+    this.props.todoList.content = [...this.props.todoList.content, newListItem];
+    this.setState({ term: '' });
   }
 
   renderListItems() {
     return _.map(this.props.todoList.content, item => {
-      return (<ListItem listitem={item} key={list.key}/>);
+      return (<ListItem key={item.key} />);
       });
   }
 
   render() {
     const { todoList } = this.props;
-    console.log(todoList);
     return (
-      <div className="col-md-4 list">
-        <form className="form-group" onSubmit={this.onFormSubmit.bind(this)}>
-          <div className="col-xs-7">
+      <div className="col-md-5 list">
+        <form className="form-group dec" onSubmit={this.onFormSubmit.bind(this)}>
+          <div className="col-xs-6 name">
+            <h3>{this.props.todoList.title}</h3>
+          </div>
+          <div className="col-xs-6 pull-xs-right">
             <input
               className="form-control"
               type="text"
+              value={this.state.term}
               placeholder="edit list title"
               onChange={this.onInputChange.bind(this)}
             />
           </div>
         </form>
-        <button className="btn btn-danger pull-xs-right">Delete</button>
+        <div>
+          {this.renderListItems()}
+        </div>
+        <form onSubmit={this.onItemSubmit.bind(this)} className="input-group">
+          <button type="submit" className="btn btn-info add">＋</button>
+        </form>
+        <button className="btn btn-warning pull-xs-right modi">Delete List</button>
       </div>
     );
   }

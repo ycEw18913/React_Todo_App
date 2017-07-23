@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import generateID from 'uniqid';
+import _ from 'lodash';
 
 import AddBar from './components/addBar';
 import TodoLists from './components/todoLists';

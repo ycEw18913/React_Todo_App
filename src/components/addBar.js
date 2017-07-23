@@ -10,8 +10,8 @@ export default class AddBar extends Component {
   onFormSubmit(event) {
     event.preventDefault();
     if (this.state.term !== '') {
-      this.setState({ term: '' });
       this.props.addTodoList(this.state.term);
+      this.setState({ term: '' });
     }
   }
 

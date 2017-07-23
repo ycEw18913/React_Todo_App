@@ -7,43 +7,29 @@ export default class listItem extends Component {
     this.state = { term: '' };
   }
 
-  onToggle() {
-
-  }
-
   onInputChange(event) {
-
+    this.setState({ term: event.target.value });
   }
-
-  onFinalChange(event) {
-    event.preventDefault();
-  }
-
-  onClickDelete() {
-
-  }
-
-  editListItem() {
-
-  }
-
+  
   render() {
-    return ();
     return (
-      <div>・
+      <div className="modi item">
+        <div className="col-xs-1">
           <input
             type="checkbox"
-            className="checkbox"
-            onClick={this.onToggle.bind(this)}
+            className="checkbox-inline"
           />
+        </div>
+        <div className="col-xs-8">
           <input
             type="text"
+            className="form-control"
+            placeholder="input item name"
+            value={this.state.term}
             onChange={this.onInputChange.bind(this)}
-            onSubmit={this.onFinalChange.bind(this)}
           />
-          <button className="btn btn-danger" onClick={this.oneClickDelete.bind(this)}>
-            DELETE
-          </button>
+        </div>
+        <button className="btn btn-danger">X</button>
       </div>
     );
   }
