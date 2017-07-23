@@ -12,7 +12,7 @@ export default class listItem extends Component {
   }
 
   onDeleteClick() {
-    this.props.deleteListItem(this.props.key);
+    this.props.deleteListItem(this.props.item.key);
   }
 
   render() {

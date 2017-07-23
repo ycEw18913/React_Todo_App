@@ -35,14 +35,15 @@ export default class TodoList extends Component {
   }
 
   deleteListItem(key) {
-    console.log(key, this.props.todoList.content);
     this.props.todoList.content = _.omit(this.props.todoList.content, key);
+    this.setState({ term: '' });
   }
 
   renderListItems() {
     return _.map(this.props.todoList.content, item => {
       return (
         <ListItem
+          item={item}
           key={item.key}
           deleteListItem={this.deleteListItem.bind(this)}
         />
@@ -52,7 +53,6 @@ export default class TodoList extends Component {
 
   render() {
     const { todoList } = this.props;
-    console.log(todoList);
     return (
       <div className="col-md-5 list">
         <form className="form-group dec" onSubmit={this.onFormSubmit.bind(this)}>
