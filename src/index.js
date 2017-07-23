@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import generateID from 'uniqid';
-import _ from 'lodash';
 
 import AddBar from './components/addBar';
 import TodoLists from './components/todoLists';
@@ -10,21 +9,22 @@ class TodoApp extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      todoLists: [],
-    };
+    this.state = { todoLists: {} };
   }
 
   addTodoList(term) {
+    const oldTodoLists = this.state.todoLists;
     const newTodoList = {
-      key: generateID(),
+      key: generateID('ID'),
       title: term,
-      content: [],
+      content: {},
     };
-    this.setState({ todoLists: [...this.state.todoLists, newTodoList] });
+    const newTodoLists = { ...oldTodoLists, [newTodoList.key]: newTodoList };
+    this.setState({ todoLists: newTodoLists });
   }
 
   render() {
+    console.log(this.state.todoLists);
     return (
       <div>
         <AddBar addTodoList={this.addTodoList.bind(this)} />
