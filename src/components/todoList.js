@@ -9,6 +9,7 @@ export default class TodoList extends Component {
     super(props);
 
     this.state = { term: '' };
+    this.count = this.count.bind(this);
   }
 
   onInputChange(event) {
@@ -27,15 +28,24 @@ export default class TodoList extends Component {
     event.preventDefault();
     const newListItem = { key: generateID('IDL') };
     this.props.todoList.content = { ...this.props.todoList.content, [newListItem.key]: newListItem };
+    this.count();
     this.setState({ term: '' });
   }
 
   onDeleteClick() {
     this.props.deleteList(this.props.todoList.key);
+    this.props.todoList.content = {};
+    this.count();
+  }
+
+  count() {
+    this.props.reRender();
+    this.props.sendBack(Object.keys(this.props.todoList.content).length);
   }
 
   deleteListItem(key) {
     this.props.todoList.content = _.omit(this.props.todoList.content, key);
+    this.count();
     this.setState({ term: '' });
   }
 
